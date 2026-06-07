@@ -12,7 +12,10 @@ function isActive(href: string) {
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/" class="brand">{SITE.title}</a>
+    <div class="brand-block">
+      <a href="/" class="brand">{SITE.title}</a>
+      <span class="brand-tagline">still learning. still curious.</span>
+    </div>
     <nav class="nav" aria-label="Primary">
       {
         NAV.map((item) => (
@@ -54,6 +57,15 @@ function isActive(href: string) {
   }
   .brand:hover {
     text-decoration: none;
+  }
+  .brand-block {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .brand-tagline {
+    color: var(--text-muted);
+    font-size: 0.78rem;
   }
   .nav {
     display: flex;

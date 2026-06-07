@@ -1,6 +1,6 @@
 // Central place for site-wide settings used across pages and feeds.
 export const SITE = {
-  title: 'My Personal Blog',
+  title: 'jblogs.net',
   description: 'Thoughts, notes, and writing on things I find interesting.',
   author: 'Jeevan Bisht',
   // Used for RSS and canonical URLs. Keep in sync with astro.config.mjs `site`.
