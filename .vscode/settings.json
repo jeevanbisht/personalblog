@@ -3,6 +3,14 @@
         "/^cd 'g:\\\\AIProjects\\\\PersonalBlog'; git init -b main; git add -A; git commit -m \"Initial commit: Astro blog for Cloudflare Pages\"$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^cd 'g:\\\\AIProjects\\\\PersonalBlog'; git config user\\.name 'Jeevan Bisht'; git config user\\.email 'bishtjev@gmail\\.com'; git commit -m \"Initial commit: Astro blog for Cloudflare Pages\"; git remote add origin https://github\\.com/jeevanbisht/personalblog\\.git; git remote -v$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd 'g:\\\\AIProjects\\\\PersonalBlog'; git push -u origin main$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

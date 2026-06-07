@@ -4,7 +4,7 @@ export const SITE = {
   description: 'Thoughts, notes, and writing on things I find interesting.',
   author: 'Your Name',
   // Used for RSS and canonical URLs. Keep in sync with astro.config.mjs `site`.
-  url: 'https://example.com',
+  url: 'https://jblogs.net',
   // Posts shown on the home page before "view all".
   postsPerHome: 5,
 };
