@@ -1,7 +1,7 @@
 ---
 title: 'AZDesign: Design Azure Labs Visually and Export Bicep'
 description: 'A drag-and-drop tool for designing Azure lab topologies in the browser and exporting deployment-ready Bicep — no backend required.'
-pubDate: 2026-06-06
+pubDate: 2026-06-07
 tags: ['azure', 'bicep', 'tools']
 draft: false
 ---
