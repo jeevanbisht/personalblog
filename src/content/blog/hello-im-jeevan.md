@@ -13,7 +13,7 @@ Hi — I'm Jeevan, and this is the first real post on my blog. I love tech and w
 I'm a Product Manager at Microsoft working on AI-driven network access, helping
 organizations secure how their people and agents connect. By day I think a lot
 about identity and secure access — I'm also a co-author of
-[Exam Ref SC-300: Microsoft Identity and Access Administrator](https://www.microsoftpressstore.com/store/exam-ref-sc-300-microsoft-identity-and-access-administrator-9780137566213).
+[Exam Ref SC-300: Microsoft Identity and Access Administrator](https://www.microsoftpressstore.com/store/exam-ref-sc-300-microsoft-identity-and-access-administrator-9780137886524).
 
 By night (and most weekends) I'm hands-on with AI: building agents, wiring up
 tools, and turning rough ideas into working samples anyone can clone and run.
