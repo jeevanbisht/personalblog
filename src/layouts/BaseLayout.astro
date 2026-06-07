@@ -7,12 +7,18 @@ interface Props {
   description?: string;
   /** Absolute or root-relative path for canonical/OG URL. */
   path?: string;
+  /** Optional schema.org JSON-LD object emitted for crawlers and AI agents. */
+  structuredData?: Record<string, unknown>;
+  /** Optional URL to a raw Markdown version of this page (for AI agents). */
+  markdownPath?: string;
 }
 
 const {
   title,
   description = SITE.description,
   path = Astro.url.pathname,
+  structuredData,
+  markdownPath,
 } = Astro.props;
 
 const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
@@ -30,6 +36,16 @@ const canonical = new URL(path, Astro.site ?? SITE.url).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {
+      markdownPath && (
+        <link
+          rel="alternate"
+          type="text/markdown"
+          href={markdownPath}
+          title="Markdown version"
+        />
+      )
+    }
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -45,6 +61,15 @@ const canonical = new URL(path, Astro.site ?? SITE.url).toString();
       href="/rss.xml"
     />
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
 
     <!-- Set theme before paint to avoid a flash of the wrong theme. -->
     <script is:inline>

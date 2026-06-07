@@ -11,6 +11,10 @@
         "/^cd 'g:\\\\AIProjects\\\\PersonalBlog'; git push -u origin main$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^cd 'g:\\\\AIProjects\\\\PersonalBlog'; git add -A; git commit -m \"Make blog AI-agent friendly: llms\\.txt, robots\\.txt, raw Markdown endpoints, JSON-LD\"; git push$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

@@ -4,15 +4,39 @@ import Header from './Header.astro';
 import Footer from './Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import type { CollectionEntry } from 'astro:content';
+import { SITE } from '../config';
 
 interface Props {
   post: CollectionEntry<'blog'>;
 }
 const { post } = Astro.props;
 const { title, description, pubDate, updatedDate, tags } = post.data;
+
+const postUrl = new URL(`/blog/${post.id}/`, Astro.site ?? SITE.url).toString();
+const markdownPath = `/blog/${post.id}.md`;
+
+// schema.org structured data so search engines and AI agents can parse the post.
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+  author: { '@type': 'Person', name: SITE.author },
+  publisher: { '@type': 'Organization', name: SITE.title },
+  keywords: tags.join(', '),
+  url: postUrl,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  structuredData={structuredData}
+  markdownPath={markdownPath}
+>
   <Header />
   <main>
     <article class="container">

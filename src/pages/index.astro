@@ -9,9 +9,19 @@ import { SITE } from '../config';
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, SITE.postsPerHome);
+
+const siteUrl = (Astro.site ?? new URL(SITE.url)).origin;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.title,
+  description: SITE.description,
+  url: siteUrl,
+  author: { '@type': 'Person', name: SITE.author },
+};
 ---
 
-<BaseLayout>
+<BaseLayout structuredData={structuredData}>
   <Header />
   <main>
     <section class="container hero">
