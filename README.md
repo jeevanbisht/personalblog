@@ -1,7 +1,8 @@
-# Personal Blog
+# JBlogs.net
 
-A fast, static blog built with [Astro](https://astro.build) and deployed for
-free on [Cloudflare Pages](https://pages.cloudflare.com).
+Source for [JBlogs.net](https://jblogs.net) — a fast, static blog built with
+[Astro](https://astro.build) and deployed for free on
+[Cloudflare Pages](https://pages.cloudflare.com).
 
 Because every page is pre-rendered to static HTML and served from Cloudflare's
 global CDN, the site stays comfortably inside the Cloudflare free tier — you
