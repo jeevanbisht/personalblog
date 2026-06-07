@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../layouts/Header.astro';
+import Footer from '../layouts/Footer.astro';
+import { SITE } from '../config';
+---
+
+<BaseLayout title="About" description={`About ${SITE.author}.`}>
+  <Header />
+  <main>
+    <section class="container prose">
+      <h1>About</h1>
+      <p>
+        Hi, I'm {SITE.author}. Welcome to my corner of the web. This is where I
+        write about the things I'm building, learning, and thinking about.
+      </p>
+      <p>
+        This blog is built with <a href="https://astro.build">Astro</a> and
+        hosted on <a href="https://pages.cloudflare.com">Cloudflare Pages</a>.
+        Replace this text with your own story.
+      </p>
+      <p>
+        You can subscribe via the <a href="/rss.xml">RSS feed</a>.
+      </p>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

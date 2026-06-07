@@ -1,0 +1,72 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, tags } = post.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main>
+    <article class="container">
+      <header class="post-header">
+        <h1>{title}</h1>
+        <div class="post-meta">
+          <FormattedDate date={pubDate} />
+          {
+            updatedDate && (
+              <span>· Updated <FormattedDate date={updatedDate} /></span>
+            )
+          }
+        </div>
+        {
+          tags.length > 0 && (
+            <div class="tags">
+              {tags.map((tag) => (
+                <a class="tag" href={`/tags/${tag}/`}>
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </header>
+      <div class="prose">
+        <slot />
+      </div>
+      <hr />
+      <a href="/blog/" class="back">← Back to all posts</a>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .post-header h1 {
+    margin-bottom: 0.5rem;
+  }
+  .post-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+  }
+  .tag {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .back {
+    font-size: 0.95rem;
+  }
+</style>

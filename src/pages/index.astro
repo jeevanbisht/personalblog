@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../layouts/Header.astro';
+import Footer from '../layouts/Footer.astro';
+import PostList from '../components/PostList.astro';
+import { SITE } from '../config';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, SITE.postsPerHome);
+---
+
+<BaseLayout>
+  <Header />
+  <main>
+    <section class="container hero">
+      <h1>{SITE.title}</h1>
+      <p class="tagline">{SITE.description}</p>
+    </section>
+    <section class="container">
+      <h2 class="section-title">Latest posts</h2>
+      <PostList posts={posts} />
+      <p class="more">
+        <a href="/blog/">View all posts →</a>
+      </p>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 1rem 0 0.5rem;
+  }
+  .tagline {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+  }
+  .section-title {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+  .more {
+    margin-top: 1.5rem;
+  }
+</style>

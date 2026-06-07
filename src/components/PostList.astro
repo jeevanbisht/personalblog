@@ -1,0 +1,75 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+const { posts } = Astro.props;
+---
+
+<ul class="post-list">
+  {
+    posts.map((post) => (
+      <li class="post-item">
+        <a class="post-title" href={`/blog/${post.id}/`}>
+          {post.data.title}
+        </a>
+        <div class="post-meta">
+          <FormattedDate date={post.data.pubDate} />
+          {post.data.tags.length > 0 && (
+            <span class="tags">
+              {post.data.tags.map((tag) => (
+                <a class="tag" href={`/tags/${tag}/`}>
+                  #{tag}
+                </a>
+              ))}
+            </span>
+          )}
+        </div>
+        <p class="post-desc">{post.data.description}</p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .post-item {
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-item:last-child {
+    border-bottom: none;
+  }
+  .post-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tag {
+    color: var(--text-muted);
+  }
+  .post-desc {
+    margin: 0.5rem 0 0;
+    color: var(--text-muted);
+  }
+</style>

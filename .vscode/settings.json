@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd 'g:\\\\AIProjects\\\\PersonalBlog'; git init -b main; git add -A; git commit -m \"Initial commit: Astro blog for Cloudflare Pages\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

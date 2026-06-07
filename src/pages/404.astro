@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../layouts/Header.astro';
+import Footer from '../layouts/Footer.astro';
+---
+
+<BaseLayout title="Page not found" description="404">
+  <Header />
+  <main>
+    <section class="container">
+      <h1>404 — Page not found</h1>
+      <p>Sorry, that page doesn't exist.</p>
+      <p><a href="/">← Back home</a></p>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
