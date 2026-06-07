@@ -28,7 +28,7 @@ Site: ${site}
 
 This file follows the llms.txt convention to help AI agents discover and read
 content. Every blog post is also available as raw Markdown by appending \`.md\`
-to its URL.
+to its URL. For all content in a single file, see ${site}/llms-full.txt.
 
 ## Blog posts
 

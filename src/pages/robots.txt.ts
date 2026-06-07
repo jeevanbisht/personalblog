@@ -41,6 +41,7 @@ Allow: /
 
 Sitemap: ${site}/sitemap-index.xml
 # LLM-friendly index: ${site}/llms.txt
+# Full content for LLMs: ${site}/llms-full.txt
 `;
 
   return new Response(body, {
