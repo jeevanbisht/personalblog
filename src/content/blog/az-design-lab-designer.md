@@ -2,6 +2,7 @@
 title: 'AZDesign: Design Azure Labs Visually and Export Bicep'
 description: 'A drag-and-drop tool for designing Azure lab topologies in the browser and exporting deployment-ready Bicep — no backend required.'
 pubDate: 2026-06-07
+image: '/images/az-design-lab-designer.jpg'
 tags: ['azure', 'bicep', 'tools']
 draft: false
 ---
@@ -17,8 +18,6 @@ I do use scripts, but constantly adjusting parameters is boring and slow. What I
 ## What it does
 
 AZDesign lets you compose Azure infrastructure on a drag-and-drop canvas, configure each resource through a properties panel, validate the network, and export production-ready Bicep — all in the browser. There's no server, no database, and no login. Diagrams save to portable JSON.
-
-![AZDesign Lab Designer canvas showing a domain controller, file server, web server, subnet, and virtual network](/images/az-design-lab-designer.jpg)
 
 ## See it in action
 

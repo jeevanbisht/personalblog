@@ -117,6 +117,27 @@ pre code {
   padding: 0;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+thead th {
+  background: var(--bg-subtle);
+  font-weight: 600;
+}
+tbody tr:nth-child(even) {
+  background: var(--bg-subtle);
+}
+
 /* Shiki dual-theme: swap CSS variables based on the active theme. */
 :root[data-theme='dark'] .astro-code,
 :root[data-theme='dark'] .astro-code span {

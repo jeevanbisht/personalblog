@@ -10,10 +10,12 @@ interface Props {
   post: CollectionEntry<'blog'>;
 }
 const { post } = Astro.props;
-const { title, description, pubDate, updatedDate, tags } = post.data;
+const { title, description, pubDate, updatedDate, image, tags } = post.data;
 
 const postUrl = new URL(`/blog/${post.id}/`, Astro.site ?? SITE.url).toString();
 const markdownPath = `/blog/${post.id}.md`;
+const ogImage = image ?? SITE.ogImage;
+const ogImageUrl = new URL(ogImage, Astro.site ?? SITE.url).toString();
 
 // schema.org structured data so search engines and AI agents can parse the post.
 const structuredData = {
@@ -21,8 +23,9 @@ const structuredData = {
   '@type': 'BlogPosting',
   headline: title,
   description,
+  image: ogImageUrl,
   datePublished: pubDate.toISOString(),
-  ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
   author: { '@type': 'Person', name: SITE.author, sameAs: SITE.sameAs },
   publisher: { '@type': 'Organization', name: SITE.title },
   keywords: tags.join(', '),
@@ -49,8 +52,9 @@ const breadcrumb = {
   structuredData={[structuredData, breadcrumb]}
   markdownPath={markdownPath}
   ogType="article"
+  image={ogImage}
   publishedTime={pubDate.toISOString()}
-  modifiedTime={updatedDate?.toISOString()}
+  modifiedTime={(updatedDate ?? pubDate).toISOString()}
 >
   <Header />
   <main>
@@ -77,6 +81,11 @@ const breadcrumb = {
           )
         }
       </header>
+      {
+        image && (
+          <img class="hero" src={image} alt={title} width="1200" height="630" />
+        )
+      }
       <div class="prose">
         <slot />
       </div>
@@ -90,6 +99,12 @@ const breadcrumb = {
 <style>
   .post-header h1 {
     margin-bottom: 0.5rem;
+  }
+  .hero {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0 0.5rem;
   }
   .post-meta {
     color: var(--text-muted);
