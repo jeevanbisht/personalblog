@@ -23,19 +23,34 @@ const structuredData = {
   description,
   datePublished: pubDate.toISOString(),
   ...(updatedDate && { dateModified: updatedDate.toISOString() }),
-  author: { '@type': 'Person', name: SITE.author },
+  author: { '@type': 'Person', name: SITE.author, sameAs: SITE.sameAs },
   publisher: { '@type': 'Organization', name: SITE.title },
   keywords: tags.join(', '),
   url: postUrl,
   mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+};
+
+// Breadcrumb trail for rich results in search engines.
+const siteOrigin = (Astro.site ?? new URL(SITE.url)).origin;
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteOrigin}/` },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteOrigin}/blog/` },
+    { '@type': 'ListItem', position: 3, name: title, item: postUrl },
+  ],
 };
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  structuredData={structuredData}
+  structuredData={[structuredData, breadcrumb]}
   markdownPath={markdownPath}
+  ogType="article"
+  publishedTime={pubDate.toISOString()}
+  modifiedTime={updatedDate?.toISOString()}
 >
   <Header />
   <main>

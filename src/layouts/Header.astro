@@ -13,8 +13,10 @@ function isActive(href: string) {
 <header class="site-header">
   <div class="container header-inner">
     <div class="brand-block">
-      <a href="/" class="brand">{SITE.title}</a>
-      <span class="brand-tagline">still learning. still curious.</span>
+      <a href="/" class="brand">
+        <span class="brand-accent">{SITE.title.slice(0, 2)}</span>{SITE.title.slice(2)}
+      </a>
+      <span class="brand-tagline">keep learning, stay curious</span>
     </div>
     <nav class="nav" aria-label="Primary">
       {
@@ -57,6 +59,10 @@ function isActive(href: string) {
   }
   .brand:hover {
     text-decoration: none;
+  }
+  .brand-accent {
+    color: #3b82f6;
+    font-weight: 800;
   }
   .brand-block {
     display: flex;

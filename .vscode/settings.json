@@ -15,6 +15,14 @@
         "/^cd 'g:\\\\AIProjects\\\\PersonalBlog'; git add -A; git commit -m \"Make blog AI-agent friendly: llms\\.txt, robots\\.txt, raw Markdown endpoints, JSON-LD\"; git push$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^Select-String -Path \"dist\\\\blog\\\\az-design-lab-designer\\\\index\\.html\" -Pattern 'og:type\\|og:image\\|article:published_time\\|twitter:card\\|BreadcrumbList\\|theme-color' \\| ForEach-Object \\{ \\$_\\.Line\\.Trim\\(\\) \\} \\| Select-Object -Unique$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Copy-Item \"C:\\\\Users\\\\G1Admin\\\\Downloads\\\\OG Image \\(1\\)\\.png\" \"public\\\\images\\\\og-default\\.png\" -Force; Add-Type -AssemblyName System\\.Drawing; \\$img = \\[System\\.Drawing\\.Image\\]::FromFile\\(\\(Resolve-Path \"public\\\\images\\\\og-default\\.png\"\\)\\); \"\\$\\(\\$img\\.Width\\) x \\$\\(\\$img\\.Height\\), \\$\\(\\(Get-Item 'public\\\\images\\\\og-default\\.png'\\)\\.Length\\) bytes\"; \\$img\\.Dispose\\(\\)$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

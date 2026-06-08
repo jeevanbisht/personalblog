@@ -5,7 +5,10 @@ import Footer from '../layouts/Footer.astro';
 import { SITE } from '../config';
 ---
 
-<BaseLayout title="About" description={`About ${SITE.author}.`}>
+<BaseLayout
+  title="About"
+  description={`About ${SITE.author} — writing on identity, network access, security, and AI.`}
+>
   <Header />
   <main>
     <section class="container prose">

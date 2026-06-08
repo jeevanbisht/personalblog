@@ -10,7 +10,10 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 );
 ---
 
-<BaseLayout title="Blog" description="All blog posts.">
+<BaseLayout
+  title="Blog"
+  description="All posts by Jeevan Bisht on identity, network access, security, and AI."
+>
   <Header />
   <main>
     <section class="container">
