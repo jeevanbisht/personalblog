@@ -89,7 +89,7 @@ The risk banner is actionable rather than decorative — it maps what was found 
 
 ```powershell
 # Clone the repo or just download the script directly
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jeevanbisht/GSASxSChecker/main/Get-GSAConflictReport.ps1" `
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jeevanbisht/GSASxSChecker/master/Get-GSAConflictReport.ps1" `
                   -OutFile "Get-GSAConflictReport.ps1"
 
 # Run as Administrator for full WFP callout enumeration
