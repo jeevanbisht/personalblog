@@ -1,13 +1,14 @@
 ---
-title: 'GSA SxS Checker — Detect WFP Driver Conflicts With the Global Secure Access Client'
-description: 'Detect WFP driver conflicts with the Microsoft Global Secure Access client — one PowerShell command, self-contained HTML report with risk scoring and remediation for 32 vendor signatures.'
+title: 'Detect Global Secure Access (GSA) Client Conflicts — GSA SxS Checker'
+description: 'Detect WFP driver conflicts with the Microsoft Global Secure Access client — one PowerShell command, self-contained HTML report with risk scoring and remediation for 59 vendor signatures.'
 pubDate: 2026-06-09
+updatedDate: 2026-06-13
 image: '/images/gsa-sxs-checker/HeroNew.jpg'
-tags: ['security', 'windows', 'powershell', 'identity', 'gsa', 'entrasuite']
+tags: ['security', 'windows', 'powershell', 'identity', 'gsa', 'global-secure-access', 'wfp', 'zero-trust', 'entrasuite']
 draft: false
 ---
 
-**GSA SxS Checker** is a free, open-source PowerShell tool that detects [Windows Filtering Platform (WFP)](https://learn.microsoft.com/en-us/windows/win32/fwp/windows-filtering-platform-start-page) driver conflicts with the [Microsoft Global Secure Access](https://learn.microsoft.com/en-us/entra/global-secure-access/) client — in one command, with zero dependencies. If you've ever seen a GSA tunnel fail with no obvious error, or you're planning a rollout and want to pre-screen devices for known conflicts before they become incidents, this tool automates what would otherwise take hours of manual investigation.
+**GSA SxS Checker** is a free, open-source PowerShell tool that detects potential conflicts with the [Microsoft Global Secure Access](https://learn.microsoft.com/en-us/entra/global-secure-access/) (GSA) client by identifying coexisting network security products and their associated [Windows Filtering Platform (WFP)](https://learn.microsoft.com/en-us/windows/win32/fwp/windows-filtering-platform-start-page) drivers that may interfere with traffic interception, redirection, or filtering operations — in one command, with zero dependencies. If you've ever seen a GSA tunnel fail with no obvious error, or you're planning a rollout and want to pre-screen devices for known conflicts before they become incidents, this tool automates what would otherwise take hours of manual investigation.
 
 ## The problem: two drivers, one set of network layers
 
@@ -118,18 +119,20 @@ The detection pipeline chains five data sources:
 | --- | --- | --- |
 | 1 | [`Win32_SystemDriver` (WMI)](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemdriver) | All SCM-registered kernel-mode drivers |
 | 2 | [`netsh wfp show state`](https://learn.microsoft.com/en-us/windows-server/networking/technologies/netsh/netsh-contexts) | Live WFP callout + provider enumeration (admin) |
-| 3 | Vendor signature matching | 32 curated vendor patterns |
+| 3 | Vendor signature matching | 59 curated vendor patterns |
 | 4 | GSA registry / services | Version, channel status, [service health](https://learn.microsoft.com/en-us/entra/global-secure-access/troubleshoot-global-secure-access-client-advanced-diagnostics) |
 | 5 | [`dsregcmd /status`](https://learn.microsoft.com/en-us/entra/identity/devices/troubleshoot-device-dsregcmd) | Entra ID / Hybrid / On-prem join detection |
 
-Step 3 is what makes the report useful beyond raw data. The script ships with signatures for 32 vendors:
+Step 3 is what makes the report useful beyond raw data. The script ships with signatures for 59 vendors, including:
 
 | Category | Vendors covered |
 | --- | --- |
-| **SSE / SASE / ZTNA** | Forcepoint, Check Point, Skyhigh, Zscaler, Netskope, Cloudflare One, iboss, Appgate SDP, Akamai EAA, Twingate |
-| **VPN clients** | Palo Alto Prisma / GlobalProtect, Cisco (Umbrella, Secure Access, AnyConnect, ISE, ASA, Meraki), Citrix Secure Access, Fortinet FortiClient, Ivanti / Pulse Secure, F5 BIG-IP Edge, SonicWall, OpenVPN, WireGuard, Tailscale |
-| **Endpoint security** | Sophos, Absolute / NetMotion, Trellix, Symantec, CrowdStrike, SentinelOne |
-| **Other** | NetLimiter |
+| **SSE / SASE / ZTNA** | Forcepoint, Check Point, Skyhigh, Zscaler, Netskope, Cloudflare One, iboss, Appgate SDP, Akamai EAA, Twingate, Perimeter 81, NordLayer, Cato Networks, Open Systems SASE, Menlo Security, Ericom Shield |
+| **VPN clients** | Palo Alto Prisma / GlobalProtect, Cisco (Umbrella, Secure Access, AnyConnect, ISE, ASA, Meraki), Citrix Secure Access, Fortinet FortiClient, Ivanti / Pulse Secure, F5 BIG-IP Edge, SonicWall, Barracuda VPN, WatchGuard Mobile VPN, Array Networks VPN, Aruba VIA, VMware Workspace ONE Tunnel, OpenVPN, WireGuard, Tailscale, ZeroTier, NetBird, Headscale, NordVPN, ExpressVPN |
+| **Endpoint security / DLP** | Sophos, Absolute / NetMotion, Trellix, Symantec, CrowdStrike, SentinelOne, BeyondTrust, Digital Guardian, Proofpoint Endpoint DLP, CoSoSys Endpoint Protector, ManageEngine DataSecurity Plus |
+| **Other** | NetLimiter, Keeper Connection Manager |
+
+The vendor database grows with each release — see the [repo](https://github.com/jeevanbisht/GSASxSChecker) for the current, complete list.
 
 Each signature encodes the known driver/service names, the WFP callout layers the product uses, and the typical conflict behaviour — so the Findings tab can tell you *why* a specific product is a problem for GSA, not just that it was detected.
 
