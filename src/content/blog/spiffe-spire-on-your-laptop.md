@@ -1,11 +1,14 @@
 ---
-title: 'SPIFFE & SPIRE on Your Laptop — Learn Workload Identity From Scratch'
-description: 'A 15-lab, hands-on tutorial that teaches SPIFFE/SPIRE workload identity and mTLS entirely on Docker Desktop. No cloud account, no sign-ups, no cost. Sets the foundation for the Agents Identity'
+title: 'SPIFFE & SPIRE Hands-On Labs: Learn Workload Identity From Scratch'
+description: 'A beginner-friendly, hands-on SPIFFE & SPIRE tutorial — 15 labs teaching workload identity, mTLS, and zero trust on Docker Desktop. No cloud, no cost, get started in 60 seconds.'
 pubDate: 2026-06-08
+updatedDate: 2026-06-13
 image: 'https://raw.githubusercontent.com/jeevanbisht/SPIFFEBasicsDesktop/main/docs/spiffe-use-cases.png'
-tags: ['security', 'spiffe', 'kubernetes', 'mtls']
+tags: ['security', 'spiffe', 'spire', 'workload-identity', 'kubernetes', 'mtls', 'zero-trust', 'tutorial']
 draft: false
 ---
+
+**New to workload identity?** This is a free, self-paced **SPIFFE & SPIRE hands-on lab for beginners** — a step-by-step tutorial you can run entirely on your laptop. Across 15 labs you'll go from the core concepts to getting started with mTLS and zero trust, with no cloud account, no sign-ups, and no cost.
 
 ## The problem SPIFFE/SPIRE solves
 
@@ -87,7 +90,7 @@ The way I learn is by simplifying things and actually trying them out. So I buil
 
 There's a bigger reason too. I wanted to build the foundation for how *agents* might have an identity — one that works across workloads, machines, datacenters, and clouds. Once you understand the foundations, it all starts to make sense.
 
-## Two tracks, 15 labs
+## The hands-on labs: two tracks, 15 labs
 
 The tutorial is split into two tracks so you can go as deep as you like:
 
@@ -96,11 +99,11 @@ The tutorial is split into two tracks so you can go as deep as you like:
 
 The only hard requirement is [Docker Desktop](https://www.docker.com/products/docker-desktop/); Track B adds `kind` and `kubectl`.
 
-## What you'll walk away with
+## What you'll learn in these labs
 
 By the end you'll have watched an SVID get issued, seen automatic certificate rotation, proven that no SVID means no access (zero trust in practice), dug into node and workload attestation on Kubernetes, and even stood up two-cluster SPIFFE federation with Envoy doing transparent mTLS.
 
-## 60-second quickstart
+## Getting started: 60-second quickstart
 
 ```bash
 git clone https://github.com/jeevanbisht/SPIFFEBasicsDesktop.git
