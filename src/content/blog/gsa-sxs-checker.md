@@ -3,7 +3,7 @@ title: 'Detect Global Secure Access (GSA) Client Conflicts — GSA SxS Checker'
 description: 'Detect WFP driver conflicts with the Microsoft Global Secure Access client — one PowerShell command, self-contained HTML report with risk scoring and remediation for 59 vendor signatures.'
 pubDate: 2026-06-09
 updatedDate: 2026-06-13
-image: '/images/gsa-sxs-checker/HeroNew.jpg'
+image: '/images/gsa-sxs-checker/HeroReport.jpg'
 tags: ['security', 'windows', 'powershell', 'identity', 'gsa', 'global-secure-access', 'wfp', 'zero-trust', 'entrasuite']
 draft: false
 ---
