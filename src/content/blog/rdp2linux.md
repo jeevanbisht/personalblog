@@ -44,6 +44,8 @@ Throughout, replace `<UBUNTU_IP>`, `<USERNAME>`, and `<PASSWORD>` with your valu
 
 This uses GNOME's system **"Remote Login"** daemon. When you connect over RDP it authenticates you and starts a fresh, headless **Wayland** GNOME session — the genuine Ubuntu desktop, with GPU-accelerated H.264 encoding when a GPU is present. Run every command on the Ubuntu machine (SSH is fine).
 
+> **Version note:** system Remote Login (`grdctl --system`) requires **GNOME 46+ (Ubuntu 24.04+)** — it does not exist on Ubuntu 22.04. The commands below were validated on **Ubuntu 26.04**; exact behaviour varies by GNOME version.
+
 ### 1. Install the package
 
 ```bash
@@ -109,6 +111,8 @@ sudo ufw status && sudo ufw allow 3389/tcp
 4. Accept the certificate warning (expected — it's self-signed).
 
 To save a reusable shortcut, create an `.rdp` file with `enablecredsspsupport:i:1` (NLA on) and `authentication level:i:0` (don't block on the self-signed cert).
+
+> **Expect a two-stage login.** The system daemon first authenticates you over RDP with NLA, then hands your connection to a fresh GNOME session where a **GDM greeter** appears and you log in a second time. A brief internal reconnect ("server redirection / handover") during this step is **normal** — it isn't an error.
 
 ✅ **Method A complete — you now have the real Ubuntu GNOME desktop over RDP.**
 
