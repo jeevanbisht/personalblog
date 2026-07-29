@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Envoy AI Security Guard request flow</title>
+  <desc id="desc">A client request reaches Envoy. Envoy sends the request context to an AI security guard that combines a MobileBERT SQL injection classifier with prompt-injection rules. On allow, Envoy forwards the request to the application; on deny it returns HTTP 403. If the guard cannot decide, Envoy blocks the request.</desc>
+  <defs>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+    <marker id="mBlue" markerWidth="11" markerHeight="11" refX="8.5" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="#2563EB"/></marker>
+    <marker id="mPurple" markerWidth="11" markerHeight="11" refX="8.5" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="#7C3AED"/></marker>
+    <marker id="mGreen" markerWidth="11" markerHeight="11" refX="8.5" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="#15803D"/></marker>
+    <marker id="mRed" markerWidth="11" markerHeight="11" refX="8.5" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="#DC2626"/></marker>
+    <style>
+      .cardTitle { font: 700 22px "Segoe UI", Arial, sans-serif; fill: #0F172A; }
+      .cardSub   { font: 400 16px "Segoe UI", Arial, sans-serif; fill: #475569; }
+      .flowLabel { font: 600 15px "Segoe UI", Arial, sans-serif; fill: #334155; }
+      .stepNum   { font: 700 14px "Segoe UI", Arial, sans-serif; fill: #FFFFFF; }
+      .chip      { font: 600 14px "Segoe UI", Arial, sans-serif; fill: #334155; }
+      .note      { font: 400 15px "Segoe UI", Arial, sans-serif; fill: #475569; }
+      .noteHead  { font: 700 13px "Segoe UI", Arial, sans-serif; fill: #64748B; letter-spacing: 1.5px; }
+      .mono      { font: 600 15px Consolas, "Courier New", monospace; fill: #0F172A; }
+      .denyTitle { font: 700 18px "Segoe UI", Arial, sans-serif; fill: #991B1B; }
+    </style>
+  </defs>
+
+  <rect x="8" y="8" width="1184" height="544" rx="24" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- ===== Top row: Client -> Envoy -> Application ===== -->
+
+  <!-- Client -->
+  <rect x="56" y="150" width="230" height="150" rx="16" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2" filter="url(#cardShadow)"/>
+  <circle cx="171" cy="196" r="26" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <path d="M159 196h24M171 184v24" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
+  <text x="171" y="250" text-anchor="middle" class="cardTitle">Client</text>
+  <text x="171" y="277" text-anchor="middle" class="cardSub">HTTP or TLS request</text>
+
+  <!-- Envoy -->
+  <rect x="470" y="130" width="260" height="190" rx="16" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="url(#cardShadow)"/>
+  <rect x="498" y="156" width="48" height="48" rx="11" fill="#FFF7ED"/>
+  <path d="M510 168h24v24h-24z M516 174h12v12h-12z" fill="none" stroke="#EA580C" stroke-width="2.5"/>
+  <text x="562" y="188" class="cardTitle">Envoy Proxy</text>
+  <text x="498" y="238" class="cardSub">Terminates TLS and routes</text>
+  <rect x="498" y="256" width="204" height="46" rx="10" fill="#FFF7ED" stroke="#FDBA74"/>
+  <text x="600" y="284" text-anchor="middle" class="mono">ext_authz filter</text>
+
+  <!-- Application -->
+  <rect x="914" y="150" width="230" height="150" rx="16" fill="#FFFFFF" stroke="#BBF7D0" stroke-width="2" filter="url(#cardShadow)"/>
+  <rect x="994" y="176" width="70" height="46" rx="9" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+  <path d="M1006 191h46M1006 205h30" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="1029" y="250" text-anchor="middle" class="cardTitle">Application</text>
+  <text x="1029" y="277" text-anchor="middle" class="cardSub">Protected backend</text>
+
+  <!-- Arrow: Client -> Envoy -->
+  <line x1="286" y1="225" x2="462" y2="225" stroke="#2563EB" stroke-width="4" marker-end="url(#mBlue)"/>
+  <circle cx="374" cy="225" r="14" fill="#2563EB"/>
+  <text x="374" y="230" text-anchor="middle" class="stepNum">1</text>
+  <text x="374" y="204" text-anchor="middle" class="flowLabel">Request</text>
+
+  <!-- Arrow: Envoy -> Application -->
+  <line x1="730" y1="225" x2="906" y2="225" stroke="#15803D" stroke-width="4" marker-end="url(#mGreen)"/>
+  <circle cx="818" cy="225" r="14" fill="#15803D"/>
+  <text x="818" y="230" text-anchor="middle" class="stepNum">4</text>
+  <text x="818" y="204" text-anchor="middle" class="flowLabel">Forward if allowed</text>
+
+  <!-- ===== AI Security Guard ===== -->
+  <rect x="410" y="392" width="380" height="130" rx="18" fill="#FFFFFF" stroke="#C4B5FD" stroke-width="2" filter="url(#cardShadow)"/>
+  <circle cx="452" cy="432" r="22" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+  <path d="M441 432l7 7 15-17" fill="none" stroke="#7C3AED" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="486" y="440" class="cardTitle">AI Security Guard</text>
+  <text x="434" y="475" class="cardSub">Normalize, score risk, then apply policy</text>
+  <rect x="434" y="486" width="180" height="30" rx="15" fill="#EEF2FF" stroke="#C7D2FE"/>
+  <text x="524" y="506" text-anchor="middle" class="chip">MobileBERT classifier</text>
+  <rect x="624" y="486" width="150" height="30" rx="15" fill="#FAF5FF" stroke="#E9D5FF"/>
+  <text x="699" y="506" text-anchor="middle" class="chip">Prompt-injection rules</text>
+
+  <!-- Two straight parallel connectors between Envoy and Guard -->
+  <line x1="576" y1="320" x2="576" y2="384" stroke="#2563EB" stroke-width="4" marker-end="url(#mBlue)"/>
+  <circle cx="576" cy="352" r="14" fill="#2563EB"/>
+  <text x="576" y="357" text-anchor="middle" class="stepNum">2</text>
+  <text x="558" y="357" text-anchor="end" class="flowLabel">Send context</text>
+
+  <line x1="624" y1="384" x2="624" y2="320" stroke="#7C3AED" stroke-width="4" marker-end="url(#mPurple)"/>
+  <circle cx="624" cy="352" r="14" fill="#7C3AED"/>
+  <text x="624" y="357" text-anchor="middle" class="stepNum">3</text>
+  <text x="642" y="357" text-anchor="start" class="flowLabel">Allow or deny</text>
+
+  <!-- Deny outcome -->
+  <line x1="410" y1="457" x2="266" y2="457" stroke="#DC2626" stroke-width="3.5" stroke-dasharray="8 6" marker-end="url(#mRed)"/>
+  <rect x="56" y="424" width="196" height="66" rx="14" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="2"/>
+  <circle cx="90" cy="457" r="16" fill="#DC2626"/>
+  <path d="M84 451l12 12M96 451l-12 12" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="118" y="452" class="denyTitle">Deny</text>
+  <text x="118" y="475" class="note">HTTP 403</text>
+
+  <!-- Fail-closed note -->
+  <rect x="914" y="392" width="230" height="100" rx="14" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="1029" y="425" text-anchor="middle" class="noteHead">FAIL-CLOSED</text>
+  <text x="1029" y="452" text-anchor="middle" class="note">If the guard can't decide,</text>
+  <text x="1029" y="473" text-anchor="middle" class="note">Envoy blocks the request.</text>
+</svg>
